@@ -1,17 +1,29 @@
-import { extensionApi } from "../src/shared/api.js";
-import { sendMessage } from "../src/shared/api.js";
+import { extensionApi, sendMessage } from "../src/shared/api.js";
+
 const tab = (await extensionApi.tabs.query({ active: true, currentWindow: true }))[0];
 const state = await sendMessage({ type: "getState", url: tab?.url });
-const enabled = document.querySelector("#enabled");
-const toggle = document.querySelector("#siteToggle");
-document.querySelector("#site").textContent = state?.site || "unknown";
+const engine = document.querySelector("#enabled");
+const siteToggle = document.querySelector("#siteToggle");
+const enabled = state?.enabled !== false;
+const siteEnabled = state?.enabledForSite !== false;
+
+document.querySelector("#site").textContent = state?.site || "Unknown site";
 document.querySelector("#count").textContent = String(state?.blockedCount || 0);
-enabled.checked = state?.enabled !== false;
-toggle.textContent = state?.enabledForSite ? "Disable on this site" : "Enable on this site";
-enabled.addEventListener("change", async () => {
-  await sendMessage({ type: "setEnabled", enabled: enabled.checked });
+engine.classList.toggle("on", enabled);
+engine.setAttribute("aria-pressed", String(enabled));
+siteToggle.classList.toggle("active", siteEnabled);
+siteToggle.setAttribute("aria-label", siteEnabled ? "Disable protection for this site" : "Enable protection for this site");
+document.querySelector("#statusDot").style.background = enabled ? "var(--cyan)" : "#64708f";
+
+engine.addEventListener("click", async () => {
+  const next = !engine.classList.contains("on");
+  engine.classList.toggle("on", next);
+  engine.setAttribute("aria-pressed", String(next));
+  document.querySelector("#statusDot").style.background = next ? "var(--cyan)" : "#64708f";
+  await sendMessage({ type: "setEnabled", enabled: next });
 });
-toggle.addEventListener("click", async () => {
-  await sendMessage({ type: "setSiteEnabled", site: state.site, enabled: !state.enabledForSite });
+
+siteToggle.addEventListener("click", async () => {
+  await sendMessage({ type: "setSiteEnabled", site: state.site, enabled: !siteEnabled });
   window.close();
 });

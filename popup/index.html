@@ -1,2 +1,39 @@
-<!doctype html><html><head><meta charset="utf-8"><title>Super Adblock</title><link rel="stylesheet" href="style.css"></head><body>
-<main><h1>Super Adblock</h1><label><input id="enabled" type="checkbox"> Blocking enabled</label><p>Site: <strong id="site">...</strong></p><p>Blocked: <strong id="count">0</strong></p><button id="siteToggle">Disable on this site</button><a href="../options/index.html" target="_blank">Options</a></main><script type="module" src="popup.js"></script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Super Adblock</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="shell">
+    <header class="hero">
+      <div class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></div>
+      <div>
+        <p class="eyebrow">SUPER ADBLOCK <span class="version">v1</span></p>
+        <h1>Quiet web.<br><em>Clear signal.</em></h1>
+      </div>
+      <div id="statusDot" class="status-dot" title="Protection status"></div>
+    </header>
+
+    <section class="site-card">
+      <div class="site-icon" aria-hidden="true">◈</div>
+      <div class="site-copy"><span>PROTECTING THIS SITE</span><strong id="site">Loading...</strong></div>
+      <button id="siteToggle" class="mini-toggle" type="button" aria-label="Toggle protection for this site"></button>
+    </section>
+
+    <section class="count-card">
+      <div class="count-orbit" aria-hidden="true"><span></span><b>✦</b></div>
+      <div><span class="eyebrow">BLOCKED REQUESTS</span><strong id="count">0</strong><small>since install</small></div>
+    </section>
+
+    <button id="enabled" class="power-row" type="button" aria-pressed="true">
+      <span class="power-icon">↯</span><span><strong>Protection engine</strong><small>Ads, trackers & annoyances</small></span><i class="switch"><b></b></i>
+    </button>
+
+    <footer><a href="../options/index.html" target="_blank">Advanced rules <span>↗</span></a><span class="pulse"></span><span>LOCAL & PRIVATE</span></footer>
+  </main>
+  <script type="module" src="popup.js"></script>
+</body>
+</html>

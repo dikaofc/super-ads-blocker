@@ -1,1 +1,14 @@
-<!doctype html><html><head><meta charset="utf-8"><title>Super Adblock options</title></head><body><main><h1>Super Adblock options</h1><label>Custom rules (one filter per line)<br><textarea id="rules" rows="12" cols="60" spellcheck="false"></textarea></label><br><button id="save">Save</button><span id="status"></span></main><script type="module" src="options.js"></script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Super Adblock · Control room</title><link rel="stylesheet" href="style.css">
+</head>
+<body><main class="panel">
+  <header><a class="back" href="../popup/index.html">← Back</a><div class="brand"><span class="logo">✦</span><span><b>SUPER ADBLOCK</b><small>CONTROL ROOM</small></span></div><span class="private">● LOCAL & PRIVATE</span></header>
+  <section class="intro"><p class="kicker">ADVANCED CONFIGURATION</p><h1>Your rules.<br><em>Your signal.</em></h1><p>Shape the filter engine with custom network rules. One filter per line. Nothing leaves this device.</p></section>
+  <section class="editor-card"><div class="editor-head"><span><i></i> CUSTOM FILTERS</span><small>ABP-style domains supported</small></div><textarea id="rules" spellcheck="false" placeholder="||example.com/ads.js&#10;||tracker.example^"></textarea><div class="editor-foot"><span id="ruleCount">0 rules</span><button id="save" type="button">Save changes <b>↗</b></button><span id="status" role="status"></span></div></section>
+  <section class="hint"><span>✦</span><p><strong>Keep it focused.</strong><br>Targeted rules are faster and kinder to your browser than broad wildcard filters.</p></section>
+  <footer><span>SUPER ADBLOCK v1.0.0</span><span>BUILT ON OFFICIAL EXTENSION APIs</span></footer>
+</main><script type="module" src="options.js"></script></body>
+</html>

@@ -24,5 +24,6 @@ copy("src");
 copy("rules");
 copy("popup");
 copy("options");
+copy("assets");
 copy(`manifest.${manifestTarget}.json`, "manifest.json");
 console.log(`Built ${target} extension in ${path.relative(root, out)}`);
