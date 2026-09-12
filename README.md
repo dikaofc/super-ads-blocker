@@ -1,48 +1,76 @@
-# <img src="./assets/brand.svg" width="34" height="34" alt="Super Adblock icon"> Super Adblock
+# <img src="./assets/brand-128.png" width="34" height="34" alt="Super Adblock icon"> Super Adblock
+
+![Version](https://img.shields.io/badge/release-v1.1.3-8875ff)
+![Firefox](https://img.shields.io/badge/Firefox-AMO%201.0.1-54d9dc)
+![Manifest](https://img.shields.io/badge/Manifest-MV3-151b31)
 
 > **Quiet web. Clear signal.**
 
 Super Adblock is a standards-based Manifest V3/WebExtensions blocker for ads,
 trackers, and annoying overlays. It combines official Declarative Net Request
-(DNR) rules with a lightweight, targeted cosmetic engine. No stealth, DRM
-changes, session theft, premium spoofing, anti-adblock bypass, or remote
-JavaScript execution.
+(DNR) rules with a lightweight, targeted cosmetic engine. It is maintained by
+[dikaofc](https://github.com/dikaofc).
+
+The current repository release is **v1.1.3**. The Firefox Add-ons listing uses
+manifest version **1.0.1** because Mozilla version numbers are managed
+separately from the cross-browser GitHub release labels.
+
+No stealth, DRM changes, session theft, premium spoofing, anti-adblock bypass,
+or remote JavaScript execution is included.
 
 <p align="center">
   <img src="./assets/filter-flow.svg" alt="Animated Super Adblock filtering flow" width="900">
 </p>
 
-## What ships in v1
+## Features
 
 | Surface | Included |
 | --- | --- |
 | Network layer | Ads, trackers, annoyances, custom rules |
 | Cosmetic layer | Generic selectors, targeted dynamic cleanup |
 | YouTube | Dedicated selectors, SPA navigation hooks |
-| Controls | Global toggle, per-site toggle, whitelist-ready storage |
+| Controls | Global toggle, per-site toggle, local whitelist storage |
 | Observability | Local blocked-request counter |
 | Performance | Debounced observer; only changed DOM nodes are processed |
 | Safety | Malformed custom rules are ignored instead of crashing the engine |
 
-## Browser support
+## Browser support and installation
 
 - Firefox (WebExtensions)
 - Chrome, Edge, Brave, and Opera (Chromium MV3)
 
 Chromium browsers use the Chrome MV3 manifest because their extension APIs are
-compatible. Builds are intentionally unpacked so each browser can load them
-through its official developer-extension flow.
+compatible.
 
-## Download
+### Firefox
 
-Get signed release assets from the
-[v1.0.0 release page](https://github.com/dikaofc/super-ads-blocker/releases/tag/v1.0.0):
+Install the reviewed version from the
+[Firefox Add-ons listing](https://addons.mozilla.org/en-US/firefox/addon/super-adblock/).
+For local development, load `dist/firefox` from `about:debugging` or run:
 
-- `super-adblock-firefox-v1.0.0.zip`
-- `super-adblock-chrome-v1.0.0.zip`
-- `super-adblock-edge-v1.0.0.zip`
-- `super-adblock-brave-v1.0.0.zip`
-- `super-adblock-opera-v1.0.0.zip`
+```powershell
+npx --yes web-ext run --source-dir .\dist\firefox
+```
+
+### Chromium browsers
+
+Open the browser's extension manager, enable **Developer mode**, choose
+**Load unpacked**, and select the matching directory under `dist/`.
+
+## Current release
+
+[Super Adblock v1.1.3](https://github.com/dikaofc/super-ads-blocker/releases/tag/v1.1.3)
+contains POSIX-path ZIP archives suitable for browser-store upload:
+
+- `super-adblock-firefox-v1.1.3.zip`
+- `super-adblock-chrome-v1.1.3.zip`
+- `super-adblock-edge-v1.1.3.zip`
+- `super-adblock-brave-v1.1.3.zip`
+- `super-adblock-opera-v1.1.3.zip`
+
+The Firefox package has been checked with `web-ext lint`. AMO signing and
+publication are handled by Mozilla; the GitHub ZIP is not itself a Mozilla
+signed package.
 
 ## Build locally
 
@@ -50,6 +78,14 @@ Requires Node.js 18 or newer. No runtime package dependencies are required.
 
 ```powershell
 npm run build
+```
+
+Targeted builds:
+
+```powershell
+npm run build:firefox
+npm run build:chrome
+npm run build:chromium
 ```
 
 Output:
@@ -63,12 +99,19 @@ dist/
 └── opera/
 ```
 
-Create release archives:
+The build copies source files into browser-specific unpacked directories. To
+create a store-compatible archive on Windows, use forward-slash entry paths:
 
 ```powershell
-New-Item -ItemType Directory -Force release
-Compress-Archive -Path dist\firefox\* -DestinationPath release\super-adblock-firefox.zip
-Compress-Archive -Path dist\chrome\* -DestinationPath release\super-adblock-chrome.zip
+@'
+from pathlib import Path
+from zipfile import ZipFile, ZIP_DEFLATED
+root = Path("dist/firefox")
+with ZipFile("release/super-adblock-firefox.zip", "w", ZIP_DEFLATED) as archive:
+    for file in root.rglob("*"):
+        if file.is_file():
+            archive.write(file, file.relative_to(root).as_posix())
+'@ | python -
 ```
 
 ## Architecture
@@ -97,7 +140,7 @@ src/
 rules/            network and cosmetic rule packs
 popup/            custom dark-glass popup UI
 options/          custom control-room UI for custom rules
-assets/           animated SVG brand and architecture artwork
+assets/           SVG artwork and PNG browser/listing icons
 ```
 
 ## Design principles
@@ -105,10 +148,18 @@ assets/           animated SVG brand and architecture artwork
 - Use official extension APIs and least-privilege behavior.
 - Keep blocking aggressive while keeping DOM work bounded.
 - Keep settings and counters local by default.
+- Do not collect personal data or execute remote code.
 - Surface failures instead of silently converting them into success.
 - Make filter updates maintainable as website markup changes.
 
+## Permissions and privacy
+
+The extension requests access to browser tabs, all website content, storage, and
+Declarative Net Request so it can block requests and clean page elements. The
+extension stores settings and blocked counts locally and does not require data
+collection. Review the source and bundled rules before installing.
+
 ## License
 
-This project is distributed for personal and educational use. Review and adapt
-the bundled rules for the sites and jurisdictions where you use the extension.
+The Firefox listing currently uses **All Rights Reserved**. No separate open
+source license has been granted for this repository.
