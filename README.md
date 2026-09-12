@@ -1,6 +1,6 @@
 # <img src="./assets/brand-128.png" width="34" height="34" alt="Super Adblock icon"> Super Adblock
 
-![Version](https://img.shields.io/badge/release-v1.1.4-8875ff)
+![Version](https://img.shields.io/badge/release-v1.1.5-8875ff)
 ![Firefox](https://img.shields.io/badge/Firefox-AMO%20ready-54d9dc)
 ![Manifest](https://img.shields.io/badge/Manifest-MV3-151b31)
 
@@ -11,8 +11,8 @@ trackers, and annoying overlays. It combines official Declarative Net Request
 (DNR) rules with a lightweight, targeted cosmetic engine. It is maintained by
 [dikaofc](https://github.com/dikaofc).
 
-The current repository release is **v1.1.4**. The Firefox Add-ons listing
-currently serves **1.0.1**; upload the `v1.1.4` Firefox package to AMO to
+The current repository release is **v1.1.5**. The Firefox Add-ons listing
+currently serves **1.0.1**; upload the `v1.1.5` Firefox package to AMO to
 publish the latest fixes.
 
 No stealth, DRM changes, session theft, premium spoofing, anti-adblock bypass,
@@ -36,7 +36,7 @@ or remote JavaScript execution is included.
 
 ## Browser support and installation
 
-- Firefox (WebExtensions)
+- Firefox Desktop and Firefox for Android (WebExtensions, Firefox 142+)
 - Chrome, Edge, Brave, and Opera (Chromium MV3)
 
 Chromium browsers use the Chrome MV3 manifest because their extension APIs are
@@ -46,6 +46,9 @@ compatible.
 
 Install the reviewed version from the
 [Firefox Add-ons listing](https://addons.mozilla.org/en-US/firefox/addon/super-adblock/).
+The manifest declares Firefox for Android support (`gecko_android`) for
+Firefox 142 and newer. On Android, install it from the AMO listing in Firefox
+for Android; local `about:debugging` development is desktop-only.
 For local development, load `dist/firefox` from `about:debugging` or run:
 
 ```powershell
@@ -59,14 +62,14 @@ Open the browser's extension manager, enable **Developer mode**, choose
 
 ## Current release
 
-[Super Adblock v1.1.4](https://github.com/dikaofc/super-ads-blocker/releases/tag/v1.1.4)
+[Super Adblock v1.1.5](https://github.com/dikaofc/super-ads-blocker/releases/tag/v1.1.5)
 contains POSIX-path ZIP archives suitable for browser-store upload:
 
-- `super-adblock-firefox-v1.1.4.zip`
-- `super-adblock-chrome-v1.1.4.zip`
-- `super-adblock-edge-v1.1.4.zip`
-- `super-adblock-brave-v1.1.4.zip`
-- `super-adblock-opera-v1.1.4.zip`
+- `super-adblock-firefox-v1.1.5.zip`
+- `super-adblock-chrome-v1.1.5.zip`
+- `super-adblock-edge-v1.1.5.zip`
+- `super-adblock-brave-v1.1.5.zip`
+- `super-adblock-opera-v1.1.5.zip`
 
 The Firefox package has been checked with `web-ext lint`. AMO signing and
 publication are handled by Mozilla; the GitHub ZIP is not itself a Mozilla
