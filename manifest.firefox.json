@@ -3,11 +3,18 @@
   "name": "Super Adblock",
   "version": "1.0.0",
   "description": "Aggressive ad, tracker, and annoyance blocking using official extension APIs.",
+  "icons": { "16": "assets/brand.svg", "32": "assets/brand.svg", "48": "assets/brand.svg", "128": "assets/brand.svg" },
   "permissions": ["declarativeNetRequest", "storage", "tabs"],
   "host_permissions": ["<all_urls>"],
   "background": { "scripts": ["src/background/index.js"], "type": "module" },
-  "action": { "default_popup": "popup/index.html" },
+  "action": { "default_popup": "popup/index.html", "default_icon": { "16": "assets/brand.svg", "32": "assets/brand.svg" } },
   "options_ui": { "page": "options/index.html", "open_in_tab": true },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "super-adblock@dikaofc.dev",
+      "data_collection_permissions": { "required": ["none"] }
+    }
+  },
   "content_scripts": [{
     "matches": ["<all_urls>"],
     "js": ["src/content/index.js"],
