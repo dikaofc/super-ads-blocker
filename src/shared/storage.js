@@ -9,7 +9,14 @@ const defaults = {
 };
 
 export async function getSettings() {
-  return { ...defaults, ...(await extensionApi.storage.local.get(defaults)) };
+  const stored = await extensionApi.storage.local.get(defaults);
+  return {
+    ...defaults,
+    ...stored,
+    whitelist: Array.isArray(stored.whitelist) ? stored.whitelist : [],
+    customRules: Array.isArray(stored.customRules) ? stored.customRules : [],
+    siteSettings: stored.siteSettings && typeof stored.siteSettings === "object" ? stored.siteSettings : {}
+  };
 }
 
 export async function updateSettings(changes) {
@@ -18,5 +25,10 @@ export async function updateSettings(changes) {
 }
 
 export function hostname(url = location.href) {
-  try { return new URL(url).hostname; } catch { return ""; }
+  try { return new URL(url).hostname.toLowerCase(); } catch { return ""; }
+}
+
+export function siteMatches(host, configuredSite) {
+  const site = String(configuredSite || "").trim().toLowerCase().replace(/^\.+|\.+$/g, "");
+  return Boolean(site && (host === site || host.endsWith(`.${site}`)));
 }

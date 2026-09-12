@@ -13,7 +13,10 @@ async function start() {
   if (state && state.enabledForSite === false) return;
   const initialScan = () => {
     const removed = clean(document);
-    if (removed) sendMessage({ type: "blocked", amount: removed }).catch(() => {});
+    if (removed) {
+      sendMessage({ type: "blocked", amount: removed })
+        .catch(error => console.warn("Could not update blocked count", error));
+    }
   };
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initialScan, { once: true });
   else initialScan();

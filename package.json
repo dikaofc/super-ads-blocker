@@ -1,12 +1,15 @@
 {
   "name": "super-adblock",
-  "version": "1.0.0",
+  "version": "1.1.4",
+  "type": "module",
   "private": true,
   "description": "A standards-based MV3/WebExtensions ad and tracker blocker.",
   "scripts": {
-    "build": "node build.js chrome && node build.js firefox && node build.js edge && node build.js brave && node build.js opera",
-    "build:chrome": "node build.js chrome",
-    "build:firefox": "node build.js firefox",
-    "build:chromium": "node build.js edge && node build.js brave && node build.js opera"
+    "build": "node build.cjs chrome && node build.cjs firefox && node build.cjs edge && node build.cjs brave && node build.cjs opera",
+    "build:chrome": "node build.cjs chrome",
+    "build:firefox": "node build.cjs firefox",
+    "build:chromium": "node build.cjs edge && node build.cjs brave && node build.cjs opera",
+    "test": "node --test test/*.test.mjs",
+    "check": "npm test && node --check build.cjs"
   }
 }

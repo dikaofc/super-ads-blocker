@@ -1,7 +1,7 @@
 # <img src="./assets/brand-128.png" width="34" height="34" alt="Super Adblock icon"> Super Adblock
 
-![Version](https://img.shields.io/badge/release-v1.1.3-8875ff)
-![Firefox](https://img.shields.io/badge/Firefox-AMO%201.0.1-54d9dc)
+![Version](https://img.shields.io/badge/release-v1.1.4-8875ff)
+![Firefox](https://img.shields.io/badge/Firefox-AMO%20ready-54d9dc)
 ![Manifest](https://img.shields.io/badge/Manifest-MV3-151b31)
 
 > **Quiet web. Clear signal.**
@@ -11,9 +11,9 @@ trackers, and annoying overlays. It combines official Declarative Net Request
 (DNR) rules with a lightweight, targeted cosmetic engine. It is maintained by
 [dikaofc](https://github.com/dikaofc).
 
-The current repository release is **v1.1.3**. The Firefox Add-ons listing uses
-manifest version **1.0.1** because Mozilla version numbers are managed
-separately from the cross-browser GitHub release labels.
+The current repository release is **v1.1.4**. The Firefox Add-ons listing
+currently serves **1.0.1**; upload the `v1.1.4` Firefox package to AMO to
+publish the latest fixes.
 
 No stealth, DRM changes, session theft, premium spoofing, anti-adblock bypass,
 or remote JavaScript execution is included.
@@ -59,14 +59,14 @@ Open the browser's extension manager, enable **Developer mode**, choose
 
 ## Current release
 
-[Super Adblock v1.1.3](https://github.com/dikaofc/super-ads-blocker/releases/tag/v1.1.3)
+[Super Adblock v1.1.4](https://github.com/dikaofc/super-ads-blocker/releases/tag/v1.1.4)
 contains POSIX-path ZIP archives suitable for browser-store upload:
 
-- `super-adblock-firefox-v1.1.3.zip`
-- `super-adblock-chrome-v1.1.3.zip`
-- `super-adblock-edge-v1.1.3.zip`
-- `super-adblock-brave-v1.1.3.zip`
-- `super-adblock-opera-v1.1.3.zip`
+- `super-adblock-firefox-v1.1.4.zip`
+- `super-adblock-chrome-v1.1.4.zip`
+- `super-adblock-edge-v1.1.4.zip`
+- `super-adblock-brave-v1.1.4.zip`
+- `super-adblock-opera-v1.1.4.zip`
 
 The Firefox package has been checked with `web-ext lint`. AMO signing and
 publication are handled by Mozilla; the GitHub ZIP is not itself a Mozilla
