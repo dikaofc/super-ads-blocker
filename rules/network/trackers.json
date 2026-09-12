@@ -1,0 +1,5 @@
+[
+  { "id": 1001, "priority": 1, "action": { "type": "block" }, "condition": { "urlFilter": "||google-analytics.com^", "resourceTypes": ["script", "xmlhttprequest"] } },
+  { "id": 1002, "priority": 1, "action": { "type": "block" }, "condition": { "urlFilter": "||connect.facebook.net^", "resourceTypes": ["script", "xmlhttprequest"] } },
+  { "id": 1003, "priority": 1, "action": { "type": "block" }, "condition": { "urlFilter": "||hotjar.com^", "resourceTypes": ["script", "xmlhttprequest"] } }
+]

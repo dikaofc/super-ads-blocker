@@ -1,0 +1,23 @@
+{
+  "manifest_version": 3,
+  "name": "Super Adblock",
+  "version": "1.0.0",
+  "description": "Aggressive ad, tracker, and annoyance blocking using official extension APIs.",
+  "permissions": ["declarativeNetRequest", "storage", "tabs"],
+  "host_permissions": ["<all_urls>"],
+  "background": { "scripts": ["src/background/index.js"], "type": "module" },
+  "action": { "default_popup": "popup/index.html" },
+  "options_ui": { "page": "options/index.html", "open_in_tab": true },
+  "content_scripts": [{
+    "matches": ["<all_urls>"],
+    "js": ["src/content/index.js"],
+    "run_at": "document_start"
+  }],
+  "declarative_net_request": {
+    "rule_resources": [
+      { "id": "ads", "enabled": true, "path": "rules/network/ads.json" },
+      { "id": "trackers", "enabled": true, "path": "rules/network/trackers.json" },
+      { "id": "annoyances", "enabled": true, "path": "rules/network/annoyances.json" }
+    ]
+  }
+}
